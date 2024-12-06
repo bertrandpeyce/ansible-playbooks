@@ -25,4 +25,8 @@
             - containerd.io
             - docker-buildx-plugin
             - docker-compose-plugin
+      - name: Ensuire docker group is present
+        ansible.builtin.group:
+          name: docker
+          state: present
       when: ansible_distribution == "Ubuntu"
