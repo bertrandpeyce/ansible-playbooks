@@ -1,6 +1,6 @@
 ---
 - name: Create a new user account 
-  hosts: localhost
+  hosts: all
   become: true
   gather_facts: true
   vars:
@@ -13,7 +13,7 @@
     user_ssh_public_key: "{{ lookup('file', '~/.ssh/azure_id_rsa.pub') }}"
   tasks:
     - block:
-      - name: Create bpeyce user
+      - name: Create "{{ user_name }}" user
         ansible.builtin.user:
           name:  "{{ user_name }}"
           comment: "{{ user_comment }}"
@@ -30,13 +30,13 @@
           state: present
           password_lock: true 
 
-      - name: debug
+      - name: Debug user ssh public key
         ansible.builtin.debug:
           msg: "public: {{ user_ssh_public_key }}"
 
       - name: Add SSH public key
         ansible.builtin.authorized_key:
-          user: bpeyce
+          user: "{{ user_name }}"
           state: present
           key: "{{ user_ssh_public_key }}"
 
