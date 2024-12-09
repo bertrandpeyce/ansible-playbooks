@@ -1,0 +1,19 @@
+- name: Get user name
+  ansible.builtin.command:
+    cmd: whoami
+  register: user_name_output
+- name: Check user is in docker group
+  ansible.builtin.include_tasks:
+    file: ../../user_group/tasks/check-user-group.yml.ansible
+  vars:
+    user_name: "{{ user_name_output.stdout }}"
+    user_groups: 
+      - docker
+- name: Stop docker-compose
+  ansible.builtin.command:
+    cmd: docker compose down
+    chdir: "{{ compose_dir }}"
+  register: docker_compose_output
+- name: Debug stderr
+  ansible.builtin.debug:
+    msg: "{{ docker_compose_output.stderr_lines }}"
