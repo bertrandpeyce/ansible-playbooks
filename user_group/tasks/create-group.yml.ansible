@@ -1,0 +1,4 @@
+- name: Create group "{{ group_name }}"
+  ansible.builtin.group:
+    name: "{{ group_name }}"
+    state: present
