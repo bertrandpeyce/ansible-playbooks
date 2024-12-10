@@ -1,14 +1,6 @@
----
-- name: Run apt update and upgrade
-  hosts: localhost
-  become: true
-  gather_facts: true
-  tasks:
-    - block:
-      - name: Update package list
-        ansible.builtin.apt:
-          update_cache: yes
-      - name: Upgrade packages
-        ansible.builtin.apt:
-          upgrade: yes
-      when: ansible_distribution == "Ubuntu"
+- name: Update package list
+  ansible.builtin.apt:
+    update_cache: yes
+- name: Upgrade packages
+  ansible.builtin.apt:
+    upgrade: yes
