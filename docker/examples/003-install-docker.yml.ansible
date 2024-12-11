@@ -1,9 +1,0 @@
----
-- name: Install Docker
-  hosts: all
-  become: true
-  gather_facts: true
-  tasks:
-    - name: Include tasks/install-docker.yml.ansible
-      ansible.builtin.include_tasks:
-        file: ../tasks/install-docker.yml.ansible
