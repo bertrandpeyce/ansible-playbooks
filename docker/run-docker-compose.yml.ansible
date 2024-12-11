@@ -4,7 +4,7 @@
   register: user_name_output
 - name: Check user is in docker group
   ansible.builtin.include_tasks:
-    file: ../user_group/tasks/check-user-group.yml.ansible
+    file: ../user_group/check-user-group.yml.ansible
   vars:
     user_name: "{{ user_name_output.stdout }}"
     user_groups: 
